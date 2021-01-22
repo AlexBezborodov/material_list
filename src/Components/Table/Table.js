@@ -1,47 +1,58 @@
 import React, { useState } from "react";
 import { Col, Row, Button } from "react-bootstrap";
-import data from "../Json-files/users.json";
 
-// const list = data.users;
+function Table({ data, delItem }) {
+ 
+  
+  // const delItem = (id) => {
+  //   let newUserList = userList;
+  //   newUserList.splice(id, 1);
+  //   setUserList(
+  //     newUserList.map((user) => {
+  //       return user;
+  //     })
+  //   );
+  // };
 
-function Table() {
-  const [userList, setUserList] = useState(data.users);
-
-  const delItem = (id) => {
-    console.log("item", userList[id]);
-    let newUserList = userList;
-    newUserList.splice(id, 1);
-    setUserList(
-      newUserList.map((user) => {
-        return user;
-      })
-    );
-  };
-
-  const mapped = userList.map((item, id) => (
-    <div className="border my-2 rounded item">
-      <Row className="table1 ">
-        <Col className="d-flex justify-content-center align-items-center  rounded-start">
+  const mapped = data.map((item, id) => (
+    <div key={id} className="border my-1 rounded item">
+      <Row className="table1   text-light">
+        <Col
+          md={3}
+          className="d-flex justify-content-center align-items-center  rounded-start"
+        >
           <div>{item.name}</div>
         </Col>
-        <Col className="d-flex justify-content-center align-items-center ">
+        <Col
+          md={4}
+          className="d-flex justify-content-center align-items-center "
+        >
           <div>{item.surname}</div>
         </Col>
-        <Col className="d-flex justify-content-center align-items-center ">
+        <Col
+          md={2}
+          className="d-flex justify-content-center align-items-center "
+        >
           <div>{item.age}</div>
         </Col>
-        <Col className="d-flex justify-content-center align-items-center ">
+        <Col
+          md={1}
+          className="d-flex justify-content-center align-items-center "
+        >
           <input type="checkbox" checked={item.bool} />
         </Col>
-        <Col className="d-flex justify-content-center align-items-center  rounded-end">
-          <Button className="m-1 visible" size="sm" variant="danger">
+        <Col
+          md={2}
+          className="d-flex justify-content-center align-items-center  rounded-end"
+        >
+          <Button className="m-1 visible" size="sm" variant="warning">
             Edit
           </Button>
           <Button
             className="m-1 visible"
             size="sm"
-            variant="info"
-            onClick={(e) => delItem(id)}
+            variant="danger"
+             onClick={() => delItem(id)}
           >
             Del
           </Button>
@@ -53,7 +64,7 @@ function Table() {
     </div>
   ));
 
-  return <div>{mapped}</div>;
+  return <div >{mapped}</div>;
 }
 
 export default Table;

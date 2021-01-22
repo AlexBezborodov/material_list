@@ -10,4 +10,4 @@
 //     return await res.json();
 //   }
 // }
-// fetch('../Components/Json-files/users.json') https://swapi.co/api
+// fetch('../Components/Json-files/users.json') 

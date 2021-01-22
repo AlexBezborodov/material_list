@@ -2,16 +2,25 @@
   height: 100px;
 }
 .item {
-  transition: ease-in-out 0.5 s;
+  transition: ease-in-out 0.8s;
+  background-color: rgba(97, 96, 96, 0.911);
 }
 .item:hover {
-  background-color: #61dafb;
+  /* background-color: #61dafb; */
+  background-color: rgba(97, 97, 97, 0.555);
   transition: ease-in-out 0.5s;
+  font-weight: bold;
+  font-size: large;
 }
 .visible {
   opacity: 0;
+  transition: 2s;
 }
 .item:hover .visible {
   opacity: 1;
-  transition: ease-out 0.8s;
+  transition: ease-out 1s;
+  transition-delay: 0.5s;
+}
+.wrapper {
+  min-height: calc(100vh - 208px)
 }
