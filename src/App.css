@@ -24,3 +24,8 @@
 .wrapper {
   min-height: calc(100vh - 208px)
 }
+.edit-item-wrapper {
+  width: 50%;
+  margin: 150px auto ;
+  
+}

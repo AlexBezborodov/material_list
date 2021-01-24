@@ -6,7 +6,7 @@ function Header() {
         <div className="header d-flex justify-content-between px-5 mb-2 align-items-center bg-info">
             <div>Logo</div>
             <SearchPanel />
-            <div>Login</div>
+            
         </div>
     )
 }
