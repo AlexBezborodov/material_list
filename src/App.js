@@ -21,14 +21,14 @@ function App() {
   const [editStatus, setEditStatus] = useState(false);
   const [editItem, setEditItem] = useState();
   const [index, setIndex] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
 
   //Current page
+
   const lastItem = activePage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
-  const currentPage = users.slice(firstItem, lastItem);
 
-
-  //Change page
+  //Change page (Pagination)
   const clickedPage = (pageNumber) => {
     setActivePage(pageNumber);
     if (pageNumber === 1) {
@@ -43,7 +43,14 @@ function App() {
       setDisabledNext(false);
     }
   };
+  const prevPage = () => {
+    setActivePage(activePage - 1);
+  };
 
+  const nextPage = () => {
+    setActivePage(activePage + 1);
+  };
+  //Delete item
   const delItem = (id) => {
     let newUserList = users;
     newUserList.splice(id, 1);
@@ -54,30 +61,23 @@ function App() {
     );
   };
 
-  const prevPage = () => {
-    setActivePage(activePage - 1);
-  };
-
-  const nextPage = () => {
-    setActivePage(activePage + 1);
-  };
-  const savedItem = ( idx, id, name, surname, age, bool, showEdit = false) => {
+  //Edit & Save item
+  const savedItem = (idx, id, name, surname, age, bool, showEdit = false) => {
     const editedItem = {
       id,
       name,
       surname,
       age,
-      bool
-    }
+      bool,
+    };
     let newUserList = users;
-     newUserList[idx]= editedItem;
-      setUsers(
+    newUserList[idx] = editedItem;
+    setUsers(
       newUserList.map((user) => {
         return user;
       })
     );
-    
-    console.log('users', users);
+
     setEditStatus(showEdit);
   };
 
@@ -86,19 +86,36 @@ function App() {
   //   setEditItem(users[id - 1]);
   // };
   const editShow = (status, id) => {
-    
-    setIndex(id - 1); 
+    setIndex(id - 1);
     setEditStatus(status);
     setEditItem(users[id - 1]);
-    
   };
   const editCancel = (status) => {
     setEditStatus(status);
   };
 
+  //Search
+  const searching = (val) => {
+    setSearchValue(val);
+  };
+  const createSearchList = (data, text) => {
+    if (text.length === 0) {
+      return data;
+    }
+    return data.filter((user) => {
+      return (
+        user.name.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
+        user.surname.toLowerCase().indexOf(text.toLowerCase()) > -1
+      );
+    });
+  };
+  let searchRes = createSearchList(users, searchValue);
+  const currentPage = searchRes.slice(firstItem, lastItem);
+
+  // (searchValue.length === 0) ? setUsers(data.users) :
   return (
     <div className="App">
-      <Header />
+      <Header searching={searching} searchValue={searchValue} />
       <Container className="wrapper">
         {editStatus ? (
           <EditField
@@ -117,7 +134,7 @@ function App() {
               editShow={editShow}
             />
             <Paginate
-              data={users}
+              data={searchRes}
               itemsPerPage={itemsPerPage}
               currentPage={activePage}
               clickedPage={clickedPage}
