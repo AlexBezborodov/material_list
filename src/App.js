@@ -28,6 +28,24 @@ function App() {
   const lastItem = activePage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
 
+  //Search
+  const searching = (val) => {
+    setSearchValue(val);
+  };
+  const createSearchList = (data, text) => {
+    if (text.length === 0) {
+      return data;
+    }
+    return data.filter((user) => {
+      return (
+        user.name.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
+        user.surname.toLowerCase().indexOf(text.toLowerCase()) > -1
+      );
+    });
+  };
+  let searchRes = createSearchList(users, searchValue);
+  const currentPage = searchRes.slice(firstItem, lastItem);
+
   //Change page (Pagination)
   const clickedPage = (pageNumber) => {
     setActivePage(pageNumber);
@@ -52,7 +70,7 @@ function App() {
   };
   //Delete item
   const delItem = (id) => {
-    let newUserList = users;
+    let newUserList = searchRes;
     newUserList.splice(id, 1);
     setUsers(
       newUserList.map((user) => {
@@ -70,7 +88,7 @@ function App() {
       age,
       bool,
     };
-    let newUserList = users;
+    let newUserList = searchRes;
     newUserList[idx] = editedItem;
     setUsers(
       newUserList.map((user) => {
@@ -94,29 +112,15 @@ function App() {
     setEditStatus(status);
   };
 
-  //Search
-  const searching = (val) => {
-    setSearchValue(val);
-  };
-  const createSearchList = (data, text) => {
-    if (text.length === 0) {
-      return data;
-    }
-    return data.filter((user) => {
-      return (
-        user.name.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
-        user.surname.toLowerCase().indexOf(text.toLowerCase()) > -1
-      );
-    });
-  };
-  let searchRes = createSearchList(users, searchValue);
-  const currentPage = searchRes.slice(firstItem, lastItem);
-  
-  // filters 
+  // filters
 
   return (
     <div className="App">
-      <Header searching={searching} searchValue={searchValue} searchRes={searchRes} />
+      <Header
+        searching={searching}
+        searchValue={searchValue}
+        searchRes={searchRes}
+      />
       <Container className="wrapper">
         {editStatus ? (
           <EditField
@@ -129,15 +133,14 @@ function App() {
         ) : (
           <div>
             <div className="table-wrapper">
-            <Table
-            
-              data={currentPage}
-              delItem={delItem}
-              //  modalShow={modalShow}
-              editShow={editShow}
-            />
+              <Table
+                data={currentPage}
+                delItem={delItem}
+                //  modalShow={modalShow}
+                editShow={editShow}
+              />
             </div>
-            
+
             <Paginate
               data={searchRes}
               itemsPerPage={itemsPerPage}

@@ -25,7 +25,7 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
 .item:hover .visible {
   opacity: 1;
   transition: ease-out 1s;
-  transition-delay: 0.5s;
+  
 }
 .wrapper {
   min-height: calc(100vh - 208px)

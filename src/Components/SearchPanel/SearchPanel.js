@@ -26,7 +26,7 @@ const SearchPanel = ({ searching, searchValue, searchRes }) => {
     } else if (filter === "age") {
         console.log('filtered array',filteredData.sort(filteredBy('age')))    
       console.log("sorted by age");
-      return filteredData.sort(filteredBy('age'));
+      return filteredData.sort(filteredBy('age')); 
     }
 
   };
