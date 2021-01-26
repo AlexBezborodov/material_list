@@ -111,11 +111,12 @@ function App() {
   };
   let searchRes = createSearchList(users, searchValue);
   const currentPage = searchRes.slice(firstItem, lastItem);
-
   
+  // filters 
+
   return (
     <div className="App">
-      <Header searching={searching} searchValue={searchValue} />
+      <Header searching={searching} searchValue={searchValue} searchRes={searchRes} />
       <Container className="wrapper">
         {editStatus ? (
           <EditField
