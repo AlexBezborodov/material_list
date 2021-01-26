@@ -11,6 +11,12 @@
   transition: ease-in-out 0.5s;
   font-weight: bold;
   font-size: large;
+  /* -webkit-box-shadow: 28px 24px 20px -16px rgba(22,184,184,1);
+-moz-box-shadow: 28px 24px 20px -16px rgba(22,184,184,1);
+box-shadow: 10px 10px 10px -10px rgba(22,184,184,1); */
+-webkit-box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
+-moz-box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
+box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
 }
 .visible {
   opacity: 0;
@@ -28,4 +34,7 @@
   width: 50%;
   margin: 150px auto ;
   
+}
+.table-wrapper {
+  min-height: 487px;
 }

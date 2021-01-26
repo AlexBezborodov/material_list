@@ -13,12 +13,11 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
   };
   ageList();
   return (
-      
     <div className="edit-item-wrapper border rounded py-1 px-1 my-2 bg-dark">
-        <h2 className="text-center text-secondary">Edited field N { idx +1 }</h2>
-      <Form >
+      <h2 className="text-center text-secondary">Edited field N {idx + 1}</h2>
+      <Form>
         <Row className="my-2 mx-2">
-          <Col  className='d-flex justify-content-center'>
+          <Col className="d-flex justify-content-center">
             <Form.Control
               value={name}
               onChange={(e) => {
@@ -26,18 +25,17 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
               }}
             />
           </Col>
-          
         </Row>
         <Row className="my-2 mx-2">
-            <Col className='d-flex justify-content-center'>
-                <Form.Control
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)}
-                />
-            </Col>
+          <Col className="d-flex justify-content-center">
+            <Form.Control
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+            />
+          </Col>
         </Row>
         <Row className="my-2 mx-2">
-          <Col  sm={9} md={6} lg={3} className='d-flex justify-content-center'>
+          <Col sm={9} md={6} lg={3} className="d-flex justify-content-center">
             <Form.Control
               as="select"
               value={age}
@@ -48,20 +46,23 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
               ))}
             </Form.Control>
           </Col>
-          <Col className='d-flex align-items-center '>
-                <input
-                type="checkbox"
-                checked={bool}
-                onChange={() => setBool(!bool)}
-                />
-            </Col>
-          </Row>
-          <Row className="my-2 mx-2">
-          <Col  className='d-flex justify-content-center '>
-            <Button className="m-1" 
-            size="sm" 
-            variant="primary"
-            onClick={() => savedItem(idx, item.id, name, surname, age, bool, false)}
+          <Col className="d-flex align-items-center ">
+            <input
+              type="checkbox"
+              checked={bool}
+              onChange={() => setBool(!bool)}
+            />
+          </Col>
+        </Row>
+        <Row className="my-2 mx-2">
+          <Col className="d-flex justify-content-center ">
+            <Button
+              className="m-1"
+              size="sm"
+              variant="primary"
+              onClick={() =>
+                savedItem(idx, item.id, name, surname, age, bool, false)
+              }
             >
               Save
             </Button>

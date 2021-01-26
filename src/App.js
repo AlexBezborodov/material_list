@@ -112,7 +112,7 @@ function App() {
   let searchRes = createSearchList(users, searchValue);
   const currentPage = searchRes.slice(firstItem, lastItem);
 
-  // (searchValue.length === 0) ? setUsers(data.users) :
+  
   return (
     <div className="App">
       <Header searching={searching} searchValue={searchValue} />
@@ -127,12 +127,16 @@ function App() {
           />
         ) : (
           <div>
+            <div className="table-wrapper">
             <Table
+            
               data={currentPage}
               delItem={delItem}
               //  modalShow={modalShow}
               editShow={editShow}
             />
+            </div>
+            
             <Paginate
               data={searchRes}
               itemsPerPage={itemsPerPage}
