@@ -1,6 +1,8 @@
 import React from "react";
 import { Pagination } from "react-bootstrap";
-const Paginate = ({ itemsPerPage, data, disabledPrev, currentPage, disabledNext, clickedPage, prevPage, nextPage }) => {
+
+const Paginate = ({ data, itemsPerPage, currentPage, clickedPage, prevPage, nextPage, disabledPrev, disabledNext }) => {
+  
   const pages = [];
    
   for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {

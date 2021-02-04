@@ -2,10 +2,11 @@ import React from "react";
 import Table from "./Components/Table/Table";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-// import Paginate from "./Components/Pagination/Paginate";
+import Paginate from "./Components/Pagination/Paginate";
 import { Container } from "react-bootstrap";
 // import EditModal from "./Components/Modal/Modal";
 import EditField from "./Components/EditField/EditField";
+import usePagination from "./Components/Hooks/usePagination";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,6 +29,17 @@ function App() {
     filtered,
     searchValue
   } = useTable();
+  const {
+    activePage,
+    currentPage,
+    itemsPerPage,
+    disabledPrev,
+    disabledNext,
+    clickedPage,
+    prevPage,
+    nextPage
+} = usePagination(searchRes)
+
   // const [activePage, setActivePage] = useState(1);
   // const [itemsPerPage] = useState(10);
   // const [disabledPrev, setDisabledPrev] = useState(true);
@@ -73,7 +85,7 @@ function App() {
               />
             </div>
 
-            {/* <Paginate
+            <Paginate
               data={searchRes}
               itemsPerPage={itemsPerPage}
               currentPage={activePage}
@@ -82,7 +94,7 @@ function App() {
               nextPage={nextPage}
               disabledPrev={disabledPrev}
               disabledNext={disabledNext}
-            /> */}
+            />
             {/* <EditModal
               show={modalStatus}
               onHide={() => modalShow(false)}
