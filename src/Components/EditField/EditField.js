@@ -14,7 +14,7 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
   ageList();
   return (
     <div className="edit-item-wrapper border rounded py-1 px-1 my-2 bg-dark">
-      <h2 className="text-center text-secondary">Edited field N {idx + 1}</h2>
+      <h2 className="text-center text-secondary">Edited field N {item.id}</h2>
       <Form>
         <Row className="my-2 mx-2">
           <Col className="d-flex justify-content-center">
@@ -61,7 +61,7 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
               size="sm"
               variant="primary"
               onClick={() =>
-                savedItem(idx, item.id, name, surname, age, bool, false)
+                savedItem(item.id, name, surname, age, bool, false)
               }
             >
               Save

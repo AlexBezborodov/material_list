@@ -38,3 +38,20 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
 .table-wrapper {
   min-height: 487px;
 }
+.App {
+  min-width: 600px;
+}
+.page-link {
+  background-color: transparent!important;
+}
+ .page-link:focus {
+  box-shadow: none!important;
+}
+.page-link:hover{
+  background-color:rgba(97, 97, 97, 0.555)!important;
+} 
+.active-page .page-link{
+  background-color:rgba(97, 97, 97, 0.555)!important;
+  color: white!important;
+  font-weight: bold;
+}

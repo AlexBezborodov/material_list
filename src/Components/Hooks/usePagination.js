@@ -1,12 +1,10 @@
 import { useState } from "react";
 
-const usePagination = (users) => {
-  const [activePage, setActivePage] = useState(1);
+const usePagination = (users,activePage, setActivePage, searchRes) => {
   const [itemsPerPage] = useState(10);
-  const [disabledPrev, setDisabledPrev] = useState(true);
+  const [disabledPrev, setDisabledPrev] = useState(false);
   const [disabledNext, setDisabledNext] = useState(false);
 //   const [modalStatus, setModalStatus] = useState(false);
-console.log(users);
 //Current page 
 const lastItem = activePage * itemsPerPage;
 const firstItem = lastItem - itemsPerPage;
@@ -14,21 +12,35 @@ const currentPage = users.slice(firstItem, lastItem)
 
 //Change page 
 const clickedPage = (pageNumber) => {
-    console.log('page number', pageNumber);
+
   setActivePage(pageNumber);
-  if (pageNumber === 1) {
+  if (pageNumber === 1 ) {
     setDisabledPrev(true);
-  } else {
+  }else if (pageNumber === Math.ceil(searchRes.length / itemsPerPage )) {
+    setDisabledNext(true);
+  }else if (Math.ceil(searchRes.length / itemsPerPage) === 1) {
+    console.log('done');
+    setDisabledNext(true);
+    setDisabledPrev(true);
+  } 
+  else {
+    setDisabledNext(false);
     setDisabledPrev(false);
   }
-
-
-  if (pageNumber === itemsPerPage) {
-    setDisabledNext(true);
-  }else {
-    setDisabledNext(false);
-  }
 }
+// if (activePage === 1 ) {
+//   setDisabledPrev(true);
+// }else if (activePage === Math.ceil(searchRes.length / itemsPerPage )) {
+//   setDisabledNext(true);
+// }else if (Math.ceil(searchRes.length / itemsPerPage) === 1) {
+//   console.log('done');
+//   setDisabledNext(true);
+//   setDisabledPrev(true);
+// } 
+// else {
+//   setDisabledNext(false);
+//   setDisabledPrev(false);
+// }
 
 const prevPage = () => {
     if (activePage === 1) {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import data from "../Json-files/users.json";
 
-const useTable = () => {
+const useTable = (setActivePage) => {
   const dataUsers = data.users;
   const headers = data.headers;
   const [users, setUsers] = useState(dataUsers);
@@ -10,11 +10,13 @@ const useTable = () => {
   const [index, setIndex] = useState(null);
   const [sorted, setSorted] = useState("↑");
   const [searchValue, setSearchValue] = useState("");
+  
 
   //Delete item
   const deletedItem = (id) => {
-    let newUserList = searchRes;
-    newUserList.splice(id, 1);
+    let newUserList = users; //searchres
+    let index = newUserList.findIndex(el => el.id === id)
+    newUserList.splice(index, 1);
     setUsers(
       newUserList.map((user) => {
         return user;
@@ -23,7 +25,7 @@ const useTable = () => {
   };
 
   //Edit & Save item
-  const savedItem = (idx, id, name, surname, age, bool, showEdit = false) => {
+  const savedItem = (id, name, surname, age, bool, showEdit = false) => {
     const editedItem = {
       id,
       name,
@@ -31,9 +33,9 @@ const useTable = () => {
       age,
       bool,
     };
-    let newUserList = searchRes;
-    newUserList[idx] = editedItem;
-    // filtered('Name')
+    let newUserList = users; // searchres
+    let index = newUserList.findIndex(el => el.id === id)
+    newUserList[index] = editedItem;
     setUsers(
       newUserList.map((user) => {
         return user;
@@ -43,11 +45,11 @@ const useTable = () => {
     setEditStatus(showEdit);
   };
 
-  const editShow = (status, id) => {
+  const editShow = (status, id, data) => {
     
     setIndex(id);
     setEditStatus(status);
-    setEditItem(users[id]);
+    setEditItem(data[id]);
   };
   const editCancel = (status) => {
     setEditStatus(status);
@@ -59,19 +61,22 @@ const useTable = () => {
   };
   const createSearchList = (info, text) => {
     
-    if (text.length === 0) {
+    if (text === "") {
       return info;
+    }else {
+      return info.filter((user) => {
+     
+        return (
+          user.name.toLowerCase().includes(text.toLowerCase()) ||
+          user.surname.toLowerCase().includes(text.toLowerCase())  
+        );
+      });
     }
-    return info.filter((user) => {
-      return (
-        user.name.toLowerCase().indexOf(text.toLowerCase()) > -1 ||
-        user.surname.toLowerCase().indexOf(text.toLowerCase()) > -1
-      );
-    });
+    
   };
 
   searchRes = createSearchList(users, searchValue);
-
+  
    //filters
    const filteredBy = (title) => {
     if (sorted === "↑") {
@@ -83,7 +88,7 @@ const useTable = () => {
     }
   };
   const filteredColumn = (filter) => {
-    let filteredData = searchRes;
+    let filteredData = users;  
 
     filteredData.sort(filteredBy(filter.toLowerCase()));
     setUsers(filteredData);
@@ -108,7 +113,7 @@ const useTable = () => {
         filteredColumn(filter);
         break;
       default:
-        return users;
+        return searchRes; 
     }
   };
   return {

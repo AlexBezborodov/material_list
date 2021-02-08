@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row, Button } from "react-bootstrap";
 
 
-function Table({ data, deletedItem, modalShow, editShow, headers,filtered, sorted }) {
+function Table({ data, deletedItem, modalShow, editShow, headers,filtered, sorted, searchValue }) {
   const tableBody = data.map((item, id) => (
     
     <div key={id} className="border my-2 rounded item">
@@ -29,7 +29,7 @@ function Table({ data, deletedItem, modalShow, editShow, headers,filtered, sorte
             size="sm"
             variant="warning"
             // onClick={() => modalShow(true,item.id)}
-            onClick={() => editShow(true, id)}
+            onClick={() => {editShow(true, id, data)  }}
           >
             Edit
           </Button>
@@ -37,7 +37,7 @@ function Table({ data, deletedItem, modalShow, editShow, headers,filtered, sorte
             className="m-1 visible"
             size="sm"
             variant="danger"
-            onClick={() => deletedItem(id)}
+            onClick={() => {deletedItem(item.id) }}
           >
             Del
           </Button>

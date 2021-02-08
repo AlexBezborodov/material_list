@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "./Components/Table/Table";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
@@ -13,8 +13,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import useTable from "./Components/Hooks/useTable";
 
 function App() {
+  const [activePage, setActivePage] = useState(1);
   const {
-    users,
     headers,
     deletedItem,
     editShow,
@@ -23,44 +23,28 @@ function App() {
     editStatus,
     editItem,
     index,
-    searching, 
+    searching,
     sorted,
     searchRes,
     filtered,
-    searchValue
-  } = useTable();
+    searchValue,
+  } = useTable(setActivePage);
   const {
-    activePage,
     currentPage,
     itemsPerPage,
     disabledPrev,
     disabledNext,
     clickedPage,
     prevPage,
-    nextPage
-} = usePagination(searchRes)
-
-  // const [activePage, setActivePage] = useState(1);
-  // const [itemsPerPage] = useState(10);
-  // const [disabledPrev, setDisabledPrev] = useState(true);
-  // const [disabledNext, setDisabledNext] = useState(false);
-  // const [modalStatus, setModalStatus] = useState(false);
-  
-  
-
-  //Current page
-
-  // const lastItem = activePage * itemsPerPage;
-  // const firstItem = lastItem - itemsPerPage;
-
-  
-
+    nextPage,
+  } = usePagination(searchRes,activePage, setActivePage, searchRes);  //searchres
+  console.log(searchRes);
   return (
     <div className="App">
       <Header
         searching={searching}
         searchValue={searchValue}
-        searchRes={users}
+        searchRes={searchRes}
       />
       <Container className="wrapper">
         {editStatus ? (
@@ -77,16 +61,17 @@ function App() {
               <Table
                 headers={headers}
                 sorted={sorted}
-                data={searchRes}
+                data={currentPage}
                 deletedItem={deletedItem}
                 //  modalShow={modalShow}
                 editShow={editShow}
                 filtered={filtered}
+                searchValue={searchValue}
               />
             </div>
 
             <Paginate
-              data={searchRes}
+              data={searchRes}  // searchres
               itemsPerPage={itemsPerPage}
               currentPage={activePage}
               clickedPage={clickedPage}

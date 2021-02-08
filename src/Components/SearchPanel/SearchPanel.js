@@ -6,7 +6,7 @@ const SearchPanel = ({ searching, searchValue }) => {
     <div className="d-flex">
       <InputGroup className="mb-3">
         <FormControl
-          className=" rounded"
+          className="rounded"
           placeholder="Search everything"
           value={searchValue}
           onChange={(val) => {
