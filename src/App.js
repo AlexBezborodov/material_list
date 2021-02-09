@@ -37,8 +37,8 @@ function App() {
     clickedPage,
     prevPage,
     nextPage,
-  } = usePagination(searchRes,activePage, setActivePage, searchRes);  //searchres
-  console.log(searchRes);
+  } = usePagination(searchRes, activePage, setActivePage, searchRes); //searchres
+  
   return (
     <div className="App">
       <Header
@@ -71,7 +71,7 @@ function App() {
             </div>
 
             <Paginate
-              data={searchRes}  // searchres
+              data={searchRes} // searchres
               itemsPerPage={itemsPerPage}
               currentPage={activePage}
               clickedPage={clickedPage}

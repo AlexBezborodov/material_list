@@ -55,3 +55,14 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
   color: white!important;
   font-weight: bold;
 }
+.error {
+  height: 50px;
+  background-color: rgba(202, 64, 39, 0.685);
+  color:red;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px; 
+  margin: 5px;
+}

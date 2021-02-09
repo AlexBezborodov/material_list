@@ -9,31 +9,30 @@ const Paginate = ({
   nextPage,
   disabledPrev,
   disabledNext,
-  currentPage
+  currentPage,
 }) => {
   const pages = [];
-  let active = '';
-  
+  let active = "";
+
   for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
     pages.push(i);
   }
 
-  const paginationPages = pages.map((number) => ( 
-      
-    
-        <Pagination.Item
-        onClick={() => clickedPage(number)}
-        key={number}
-        className={active =(currentPage === number)? active += 'active-page': ''}
-      >
-        {number}
-      </Pagination.Item>
-    
+  const paginationPages = pages.map((number) => (
+    <Pagination.Item
+      onClick={() => clickedPage(number)}
+      key={number}
+      className={
+        (active = currentPage === number ? (active += "active-page") : "")
+      }
+    >
+      {number}
+    </Pagination.Item>
   ));
-  
+
   return (
     <div className="d-flex justify-content-center align-items-center py-3 ">
-      <Pagination >
+      <Pagination>
         <Pagination.Prev disabled={disabledPrev} onClick={() => prevPage()} />
         {paginationPages}
         <Pagination.Next disabled={disabledNext} onClick={() => nextPage()} />

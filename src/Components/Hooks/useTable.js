@@ -10,12 +10,11 @@ const useTable = (setActivePage) => {
   const [index, setIndex] = useState(null);
   const [sorted, setSorted] = useState("↑");
   const [searchValue, setSearchValue] = useState("");
-  
 
   //Delete item
   const deletedItem = (id) => {
     let newUserList = users; //searchres
-    let index = newUserList.findIndex(el => el.id === id)
+    let index = newUserList.findIndex((el) => el.id === id);
     newUserList.splice(index, 1);
     setUsers(
       newUserList.map((user) => {
@@ -34,7 +33,7 @@ const useTable = (setActivePage) => {
       bool,
     };
     let newUserList = users; // searchres
-    let index = newUserList.findIndex(el => el.id === id)
+    let index = newUserList.findIndex((el) => el.id === id);
     newUserList[index] = editedItem;
     setUsers(
       newUserList.map((user) => {
@@ -46,7 +45,6 @@ const useTable = (setActivePage) => {
   };
 
   const editShow = (status, id, data) => {
-    
     setIndex(id);
     setEditStatus(status);
     setEditItem(data[id]);
@@ -54,31 +52,28 @@ const useTable = (setActivePage) => {
   const editCancel = (status) => {
     setEditStatus(status);
   };
-//   Search
+  //   Search
   let searchRes;
   const searching = (val) => {
     setSearchValue(val);
   };
   const createSearchList = (info, text) => {
-    
     if (text === "") {
       return info;
-    }else {
+    } else {
       return info.filter((user) => {
-     
         return (
           user.name.toLowerCase().includes(text.toLowerCase()) ||
-          user.surname.toLowerCase().includes(text.toLowerCase())  
+          user.surname.toLowerCase().includes(text.toLowerCase())
         );
       });
     }
-    
   };
 
   searchRes = createSearchList(users, searchValue);
-  
-   //filters
-   const filteredBy = (title) => {
+
+  //filters
+  const filteredBy = (title) => {
     if (sorted === "↑") {
       setSorted("↓");
       return (a, b) => (b[title] > a[title] ? 1 : -1);
@@ -88,7 +83,7 @@ const useTable = (setActivePage) => {
     }
   };
   const filteredColumn = (filter) => {
-    let filteredData = users;  
+    let filteredData = users;
 
     filteredData.sort(filteredBy(filter.toLowerCase()));
     setUsers(filteredData);
@@ -113,7 +108,7 @@ const useTable = (setActivePage) => {
         filteredColumn(filter);
         break;
       default:
-        return searchRes; 
+        return searchRes;
     }
   };
   return {
@@ -127,11 +122,11 @@ const useTable = (setActivePage) => {
     editStatus,
     editItem,
     index,
-    searching, 
+    searching,
     sorted,
     searchRes,
     filtered,
-    searchValue
+    searchValue,
   };
 };
 
