@@ -2,15 +2,15 @@ import React from "react";
 import { Col, Row, Button } from "react-bootstrap";
 
 function Table({
-  data,
+  tableData,
+  headersConfig,
   deletedItem,
   modalShow,
   editShow,
-  headers,
   filtered,
   sorted,
 }) {
-  const tableBody = data.map((item, id) => (
+  const tableBody = tableData.map((item, id) => (
     <div key={id} className="border my-2 rounded item">
       <Row className="text-light">
         <Col className="d-flex justify-content-center align-items-center  rounded-start">
@@ -36,7 +36,7 @@ function Table({
             variant="warning"
             // onClick={() => modalShow(true,item.id)}
             onClick={() => {
-              editShow(true, id, data);
+              editShow(true, id, tableData);
             }}
           >
             Edit
@@ -55,7 +55,7 @@ function Table({
       </Row>
     </div>
   ));
-  const tableHeader = headers.map((header, id) => {
+  const tableHeader = headersConfig.map((header, id) => {
     return (
       <Col
         className="border-bottom d-flex justify-content-center align-items-center text-uppercase font-weight-bold"
