@@ -1,10 +1,7 @@
 import { useState } from "react";
-import data from "../Json-files/users.json";
 
-const useTable = (setActivePage) => {
-  const dataUsers = data.users;
-  const headers = data.headers;
-  const [users, setUsers] = useState(dataUsers);
+const useTable = (tableData, headers) => {
+  const [users, setUsers] = useState(tableData);
   const [editStatus, setEditStatus] = useState(false);
   const [editItem, setEditItem] = useState();
   const [index, setIndex] = useState(null);
