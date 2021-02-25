@@ -1,0 +1,21 @@
+.transparent-input {
+    background-color: transparent!important;
+    color: white!important;
+    
+}
+.transparent-input:focus {
+    outline: 0!important;
+    box-shadow: none!important;
+    border-color: rgba(22,184,184,1)!important;
+    color: rgba(22,184,184,1)!important;
+}
+.transparent-input::placeholder {
+    text-align: center;
+    color: white!important;
+    opacity: 0.6!important;
+}
+option {
+    background-color: rgba(97, 96, 96, 0.911)!important;
+    
+    
+}

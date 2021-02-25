@@ -9,7 +9,9 @@ function Table({
   headers,
   filtered,
   sorted,
+  sortedColumn
 }) {
+  
   const tableBody = data.map((item, id) => (
     <div key={id} className="border my-2 rounded item">
       <Row className="text-light">
@@ -17,10 +19,18 @@ function Table({
           <div>{item.id}</div>
         </Col>
         <Col className="d-flex justify-content-center align-items-center">
-          <div>{(item.name.substr().length > 15)? `${item.name.substr(0,15)}...`: item.name}</div>
+          <div>
+            {item.name.substr().length > 15
+              ? `${item.name.substr(0, 15)}...`
+              : item.name}
+          </div>
         </Col>
         <Col className="d-flex justify-content-center align-items-center ">
-          <div>{(item.surname.substr().length > 15)? `${item.surname.substr(0,15)}...`: item.surname}</div>
+          <div>
+            {item.surname.substr().length > 15
+              ? `${item.surname.substr(0, 15)}...`
+              : item.surname}
+          </div>
         </Col>
         <Col className="d-flex justify-content-center align-items-center ">
           <div>{item.age}</div>
@@ -61,13 +71,11 @@ function Table({
         className="border-bottom d-flex justify-content-center align-items-center text-uppercase font-weight-bold"
         key={id}
         onClick={(val) => {
-          filtered(header.nameHeader);
+          filtered(header.propName, header.nameHeader);
         }}
       >
         {header.nameHeader}
-        {header.nameHeader === "Bool" || header.nameHeader === "Change"
-          ? null
-          : sorted}
+        {header.nameHeader === sortedColumn ? sorted : null}
       </Col>
     );
   });

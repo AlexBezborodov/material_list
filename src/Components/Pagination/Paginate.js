@@ -10,6 +10,7 @@ const Paginate = ({
   disabledPrev,
   disabledNext,
   currentPage,
+  setActivePage
 }) => {
   const pages = [];
   let active = "";
@@ -17,7 +18,9 @@ const Paginate = ({
   for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
     pages.push(i);
   }
-
+  if (currentPage > pages.length) {
+    setActivePage(pages.length)
+  }
   const paginationPages = pages.map((number) => (
     <Pagination.Item
       onClick={() => clickedPage(number)}
