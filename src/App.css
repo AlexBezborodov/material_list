@@ -1,8 +1,8 @@
 .header {
   height: 100px;
 }
-.item {
-  transition: ease-in-out 0.8s;
+.item, .add-item {
+  transition: ease-in-out 1.8s;
   background-color: rgba(97, 96, 96, 0.911);
 }
 .item:hover {
@@ -18,9 +18,19 @@ box-shadow: 10px 10px 10px -10px rgba(22,184,184,1); */
 -moz-box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
 box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
 }
+.add-item:hover {
+  transition: ease-in-out 0.5s;
+  
+  
+}
+/* .add-item:hover .visible {
+  opacity: 1;
+  transition: ease-out 1.5s;
+  
+} */
 .visible {
   opacity: 0;
-  transition: 2s;
+  transition: ease-out 1s;
 }
 .item:hover .visible {
   opacity: 1;
@@ -65,4 +75,12 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
   align-items: center;
   border-radius: 5px; 
   margin: 5px;
+}
+.danger {
+  border: 2px solid  rgba(245, 9, 9, 0.932) !important;
+  border-radius: 5px!important;
+  color: red!important;
+}
+.w-500 {
+  width: 500px!important;
 }

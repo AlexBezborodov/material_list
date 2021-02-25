@@ -1,43 +1,26 @@
 import React, { useState } from "react";
 import { Form, Col, Row, Button } from "react-bootstrap";
-import ErrorBoundry from '../Error-boundry/ErrorBoundry'
+import ErrorBoundry from "../Error-boundry/ErrorBoundry";
+import useValidation from "../../Hooks/useValidation";
 
 const EditField = ({ item, editCancel, savedItem, idx }) => {
   const [name, setName] = useState(item.name);
   const [surname, setSurname] = useState(item.surname);
   const [age, setAge] = useState(item.age);
   const [bool, setBool] = useState(item.bool);
-  let isError = false;
-  let isDisabled = false;
-  let errorText = '';
+  const [isError, setIsError] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [errorText, setErrorText] = useState("");
+  const [validation] = useValidation(setIsError, setIsDisabled, setErrorText,name,surname);
   let ageArr = [];
-  let onlyLetter = "[0-9]"
+  
   const ageList = () => {
     for (let i = 0; i <= 100; i++) {
       ageArr.push(i);
     }
   };
   ageList();
-  if (name.length === 0 ) {
-    isError = true;
-    isDisabled = true;
-    errorText = 'Name must be greater then zero'
-  }
-  if (surname.length === 0) {
-    isError = true;
-    isDisabled = true;
-    errorText = 'Surname must be greater then zero'
-  }
-  if ((name === "") && (surname ==="")) {
-    isError = true;
-    isDisabled = true;
-    errorText = 'Both inputs must be greater then zero'
-  }
-  if ((name.match(onlyLetter)) || (surname.match(onlyLetter))) {
-    isError = true;
-    isDisabled = true;
-    errorText = 'Name or Surname cant`t includes figures'
-  }
+  
   return (
     <div className="edit-item-wrapper border rounded py-1 px-1 my-2 bg-dark">
       <h2 className="text-center text-secondary">Edited field N {item.id}</h2>
@@ -47,18 +30,24 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
             <label className="text-light my-2 mx-1 mr-4">Name</label>
             <Form.Control
               value={name}
+              className="transparent-input"
+              name="name"
               onChange={(e) => {
                 setName(e.target.value);
               }}
+              onBlur={(e) => validation( name, e)}
             />
           </Col>
         </Row>
         <Row className="my-2 mx-2">
           <Col className="d-flex justify-content-center">
-          <label className="text-light my-2 mx-1">Surname</label>
+            <label className="text-light my-2 mx-1">Surname</label>
             <Form.Control
               value={surname}
+              className="transparent-input"
+              name="surname"
               onChange={(e) => setSurname(e.target.value)}
+              onBlur={(e) => validation( surname, e)}
             />
           </Col>
         </Row>
@@ -106,7 +95,7 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
           </Col>
         </Row>
       </Form>
-      {(isError)?<ErrorBoundry errorText={errorText} />: null}
+      {isError ? <ErrorBoundry errorText={errorText} /> : null}
     </div>
   );
 };
