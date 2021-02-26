@@ -14,6 +14,7 @@ const useFilter = (data) => {
         return (
           user.name.toLowerCase().includes(text.toLowerCase()) ||
           user.surname.toLowerCase().includes(text.toLowerCase())
+          
         );
       });
     }

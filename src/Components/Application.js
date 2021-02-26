@@ -18,9 +18,10 @@ function Application({ data }) {
   const headers = data.headers;
   const [activePage, setActivePage] = useState(1);
   const [newData, addItem] = useAddItem(dataUsers);
-  const [searching, searchValue, filteredData] = useFilter(newData);
-  const [filtered, sorted, sortedColumn] = useSort(filteredData);
-
+  const [filtered, sorted, sortedColumn,sortedData] = useSort(newData);
+  const [searching, searchValue, filteredData] = useFilter(sortedData);
+  
+    
   const {
     deletedItem,
     editShow,
@@ -82,6 +83,7 @@ function Application({ data }) {
               nextPage={nextPage}
               disabledPrev={disabledPrev}
               disabledNext={disabledNext}
+              searchValue={searchValue}
             />
             {/* <EditModal
               show={modalStatus}
