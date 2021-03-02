@@ -9,15 +9,16 @@ const usePagination = (filteredData, activePage, setActivePage) => {
   const lastItem = activePage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
   const currentPage = filteredData.slice(firstItem, lastItem);
+  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
 
   //Change page
   const clickedPage = (pageNumber) => {
     setActivePage(pageNumber);
     if (pageNumber === 1) {
       setDisabledPrev(true);
-    } else if (pageNumber === Math.ceil(filteredData.length / itemsPerPage)) {
+    } else if (pageNumber === pageCount) {
       setDisabledNext(true);
-    } else if (Math.ceil(filteredData.length / itemsPerPage) === 1) {
+    } else if (pageCount === 1) {
       setDisabledNext(true);
       setDisabledPrev(true);
     } else {

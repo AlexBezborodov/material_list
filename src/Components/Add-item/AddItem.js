@@ -16,18 +16,21 @@ const AddItem = ({ addItem }) => {
   const [validation] = useValidation(setIsError, setIsDisabled, setErrorText,name,surname);
   let newId = Math.floor(Math.random() * 1000 + 100);
   let ageArr = [];
-
   const ageList = () => {
     for (let i = 0; i <= 100; i++) {
       ageArr.push(i);
     }
   };
   ageList();
+  const inActiveButtons = () => {
+    setIsDisabled(true)
+  }
   const clearFields = () => {
     setName("");
     setSurName("");
     setAge(18);
     setBool(true);
+    inActiveButtons();
   };
 
   return (
@@ -87,12 +90,13 @@ const AddItem = ({ addItem }) => {
             onClick={() => {
               addItem(newId, name, surname, age, bool);
               clearFields();
+              inActiveButtons();
             }}
           >
             Add
           </Button>
           <Button
-            className="m-1 "
+            className="m-1"
             disabled={isDisabled}
             size="sm"
             variant="warning"

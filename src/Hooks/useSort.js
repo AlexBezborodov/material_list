@@ -1,8 +1,10 @@
 import { useState } from "react";
 
-const useSort = (filteredData) => {
+const useSort = (newData) => {
   const [sorted, setSorted] = useState("↑");
-  const[sortedColumn, setSortedColumn] = useState("")
+  const[sortedColumn, setSortedColumn] = useState("");
+  const [sortedData] = useState(newData);
+  
   const filteredBy = (title) => {
     if (sorted === "↑") {
       setSorted("↓");
@@ -12,10 +14,10 @@ const useSort = (filteredData) => {
       return (a, b) => (a[title] > b[title] ? 1 : -1);
     }
   };
-  const filteredColumn = (filter, column) => {
-    setSortedColumn(column)
-   
-    filteredData.sort(filteredBy(filter.toLowerCase()));
+  const filteredColumn = (propName, column) => {
+    setSortedColumn(column);
+    sortedData.sort(filteredBy(propName.toLowerCase()))
+    
   };
   const filtered = (propName, column) => {
     switch (propName) {
@@ -32,10 +34,11 @@ const useSort = (filteredData) => {
         filteredColumn(propName, column);
         break;
       default:
-        return filteredData;
+        return newData;
     }
   };
-  return [filtered, sorted, sortedColumn];
+
+  return [filtered, sorted, sortedColumn, sortedData];
 };
 
 export default useSort;

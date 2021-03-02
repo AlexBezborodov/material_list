@@ -1,4 +1,3 @@
-
 const useValidation = (
   setIsError,
   setIsDisabled,
@@ -7,14 +6,13 @@ const useValidation = (
   surname
 ) => {
   let onlyLetter = "[0-9]";
-  
+
   // const buttonValidate = (name, surname) => {
   //   if (name.length > 0 && surname.length > 0) {
   //     setIsDisabled(false);
 
   //   }
   // };
-  
 
   const validation = (value, e) => {
     let field = `Field must be greater then zero`;
@@ -24,6 +22,7 @@ const useValidation = (
       e.target.classList = "form-control transparent-input danger";
     } else if (name.match(onlyLetter) || surname.match(onlyLetter)) {
       setIsError(true);
+
       setErrorText("Name or Surname cant`t includes figures");
       e.target.classList = "form-control transparent-input danger";
     } else {
@@ -36,4 +35,3 @@ const useValidation = (
   return [validation];
 };
 export default useValidation;
-
