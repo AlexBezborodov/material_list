@@ -1,3 +1,4 @@
+
 const useValidation = (
   setIsError,
   setIsDisabled,
@@ -7,12 +8,12 @@ const useValidation = (
 ) => {
   let onlyLetter = "[0-9]";
   
-  const buttonValidate = (name, surname) => {
-    if (name.length > 0 && surname.length > 0) {
-      setIsDisabled(false);
+  // const buttonValidate = (name, surname) => {
+  //   if (name.length > 0 && surname.length > 0) {
+  //     setIsDisabled(false);
 
-    }
-  };
+  //   }
+  // };
   
 
   const validation = (value, e) => {
@@ -35,3 +36,4 @@ const useValidation = (
   return [validation];
 };
 export default useValidation;
+

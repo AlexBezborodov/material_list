@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 
 const usePagination = (filteredData, activePage, setActivePage) => {
   const [itemsPerPage] = useState(10);
@@ -9,9 +9,7 @@ const usePagination = (filteredData, activePage, setActivePage) => {
   const lastItem = activePage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
   const currentPage = filteredData.slice(firstItem, lastItem);
-  console.log(filteredData);
-  
-  // useEffect(() =>{}, filteredData)
+
   //Change page
   const clickedPage = (pageNumber) => {
     setActivePage(pageNumber);
@@ -28,27 +26,20 @@ const usePagination = (filteredData, activePage, setActivePage) => {
     }
   };
 
-  // const prevPage = () => {
-  //   if (activePage === 1) {
-  //     return activePage;
-  //   } 
-  //   return setActivePage(activePage - 1);
-    
-  // };
-
-  const prevPage = useCallback(() => {
-    if(activePage === 1) {
-      return activePage
+  const prevPage = () => {
+    if (activePage === 1) {
+      return activePage;
+    } else {
+      setActivePage(activePage - 1);
     }
-    setActivePage(activePage - 1)
-  }, [activePage, setActivePage])
+  };
 
   const nextPage = () => {
     if (activePage === Math.ceil(filteredData.length / itemsPerPage)) {
       return activePage;
-    } 
-    return setActivePage(activePage + 1);
-    
+    } else {
+      setActivePage(activePage + 1);
+    }
   };
 
   return {

@@ -17,7 +17,9 @@ function Application({ data }) {
   const headers = data.headers;
   const [activePage, setActivePage] = useState(1);
   const [newData, addItem] = useAddItem(dataUsers);
-  const [searching, searchValue, filteredData] = useFilter(newData, setActivePage);
+
+  const [searching, searchValue, filteredData] = useFilter(newData);
+
   const [filtered, sorted, sortedColumn] = useSort(filteredData);
 
   const {
@@ -65,7 +67,6 @@ function Application({ data }) {
                 sortedColumn={sortedColumn}
                 data={currentPage}
                 deletedItem={deletedItem}
-                //  modalShow={modalShow}
                 editShow={editShow}
                 filtered={filtered}
                 searchValue={searchValue}
