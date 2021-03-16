@@ -11,6 +11,7 @@ const Paginate = ({
   disabledNext,
   currentPage,
   setActivePage,
+  activePage
 }) => {
   const pages = [];
   let active = "";
@@ -20,7 +21,9 @@ const Paginate = ({
   }
 
   if (currentPage > pages.length) {
-    setActivePage(pages.length);
+    setActivePage(1);
+  }else {
+    setActivePage(activePage)
   }
   const paginationPages = pages.map((number) => (
     <Pagination.Item

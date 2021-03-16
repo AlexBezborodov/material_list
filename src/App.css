@@ -67,7 +67,7 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
 }
 .error {
   height: 50px;
-  background-color: rgba(202, 64, 39, 0.685);
+  background-color: rgba(202, 63, 39, 0.548);
   color:red;
   font-weight: bold;
   display: flex;
@@ -75,9 +75,10 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
   align-items: center;
   border-radius: 5px; 
   margin: 5px;
+  padding: 15px;
 }
 .danger {
-  border: 2px solid  rgba(245, 9, 9, 0.932) !important;
+  border: 2px solid  rgb(245, 9, 9) !important;
   border-radius: 5px!important;
   color: red!important;
 }

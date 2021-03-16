@@ -11,17 +11,16 @@ import useSort from "../Hooks/useSort";
 import useFilter from "../Hooks/useFiltered";
 import AddItem from "./Add-item/AddItem";
 import useAddItem from "../Hooks/useAddItem";
+import StartPage from './Start-page/Start-page';
 
 function Application({ data }) {
   const dataUsers = data.users;
   const headers = data.headers;
   const [activePage, setActivePage] = useState(1);
   const [newData, addItem] = useAddItem(dataUsers);
-
   const [searching, searchValue, filteredData] = useFilter(newData);
-
   const [filtered, sorted, sortedColumn] = useSort(filteredData);
-
+  const [isEnter, setIsEnter] = useState(true);
   const {
     deletedItem,
     editShow,
@@ -48,7 +47,11 @@ function Application({ data }) {
         searching={searching}
         searchValue={searchValue}
         searchRes={filteredData}
+        isEnter={isEnter}
+        setIsEnter={setIsEnter}
+        
       />
+      {isEnter? <StartPage setIsEnter={setIsEnter} /> : 
       <Container className="wrapper">
         {editStatus ? (
           <EditField
@@ -83,12 +86,14 @@ function Application({ data }) {
               disabledPrev={disabledPrev}
               disabledNext={disabledNext}
               setActivePage={setActivePage}
+              activePage={activePage}
             />
-
             <AddItem addItem={addItem} />
           </div>
         )}
-      </Container>
+      </Container>}
+
+      
 
       <Footer />
     </div>

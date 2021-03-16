@@ -1,0 +1,13 @@
+.logo{
+    width: 40px;
+    height: 40px;
+    background-color: rgba(97, 96, 96, 0.911);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(22,184,184,1);
+    font-weight: bold;
+    font-size: 30px;
+    padding: 10px;
+    margin: 1px;
+}

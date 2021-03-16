@@ -34,7 +34,7 @@ const AddItem = ({ addItem }) => {
   };
 
   return (
-    <div className="border my-2 rounded add-item">
+    <div className="border my-1 rounded add-item">
       <Row className="text-light">
         <Col className="d-flex justify-content-center align-items-center disabled  rounded-start"></Col>
         <Col className="d-flex justify-content-center align-items-center">

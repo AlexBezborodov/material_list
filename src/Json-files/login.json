@@ -1,0 +1,6 @@
+{
+  "regUsers": [
+    { "email": "abe@gmail.com", "password": "q1w2e3r4" },
+    { "email": "testuser@gmail.com", "password": "testUser" }
+  ]
+}
