@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import ErrorBoundry from "../Error-boundry/ErrorBoundry";
-// import useEnterValid from "../../Hooks/useEnterValid";
-// import enterUserData from "../../Json-files/login.json";
 
 const StartPage = ({ setIsEnter }) => {
   const [email, setEmail] = useState("");
   const [psw, setPsw] = useState("");
   const [emailDirty, setEmailDirty] = useState(false);
   const [pswDirty, setPswDirty] = useState(false);
-  const [check, setCheck] = useState(false);
   const [emailError, setEmailError] = useState("email can`t be empty");
   const [pwdError, setPwdError] = useState("password can`t be empty");
-  // const [isError, setIsError] = useState(true);
-  // const [emailError, pwdError] = useEnterValid(enterUserData.regUsers)
+  const [formValid, setFormValid] = useState (false)
+  
+  useEffect(() => {
+   if (emailError || pwdError) {
+     setFormValid(false)
+   } else {
+    setFormValid(true)
+   }
+   
+  }, [emailError,pwdError])
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -76,15 +81,9 @@ const StartPage = ({ setIsEnter }) => {
               onBlur={(e) => blurHandler(e)}
             />
           </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check
-              type="checkbox"
-              value={check}
-              label="Check me out"
-              onChange={(e) => setCheck(e.target.value)}
-            />
-          </Form.Group>
+          
           <Button
+            disabled={!formValid}
             variant="info"
             type="button"
             onClick={() => setIsEnter(false)}

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Avatar from "../Avatar/Avatar";
 import SearchPanel from "../SearchPanel/SearchPanel";
 import {Button} from "react-bootstrap";
@@ -10,7 +10,7 @@ function Header({ searching, searchValue, searchRes, isEnter, setIsEnter }) {
   
   return (
     <div className="header d-flex bg-info">
-      <div className="d-flex justify-content-center align-items-center col col-2">{isEnter? <Logo /> : <Avatar name="OB" />}</div>
+      <div className="d-flex pl-1 justify-content-center align-items-center col col-2">{isEnter? <Logo /> : <Avatar name="OB" />}</div>
       <div className="d-flex justify-content-center align-items-center col col-8">
         <SearchPanel
           searching={searching}

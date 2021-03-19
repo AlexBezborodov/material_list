@@ -12,6 +12,7 @@ import useFilter from "../Hooks/useFiltered";
 import AddItem from "./Add-item/AddItem";
 import useAddItem from "../Hooks/useAddItem";
 import StartPage from './Start-page/Start-page';
+import SideBar from "./SideBar/SideBar";
 
 function Application({ data }) {
   const dataUsers = data.users;
@@ -21,6 +22,7 @@ function Application({ data }) {
   const [searching, searchValue, filteredData] = useFilter(newData);
   const [filtered, sorted, sortedColumn] = useSort(filteredData);
   const [isEnter, setIsEnter] = useState(true);
+  const [sideBar,setSideBar] = useState('open-side-bar')
   const {
     deletedItem,
     editShow,
@@ -41,6 +43,16 @@ function Application({ data }) {
     nextPage,
   } = usePagination(filteredData, activePage, setActivePage);
 
+
+    
+    
+    const isOpenSideBar = () => {
+      let open = "";  
+      (sideBar === "open-side-bar")? open = "close-side-bar" : open = "open-side-bar";
+      console.log(open);      
+      setSideBar(open)  
+    }  
+
   return (
     <div className="App ">
       <Header
@@ -51,8 +63,9 @@ function Application({ data }) {
         setIsEnter={setIsEnter}
         
       />
-      {isEnter? <StartPage setIsEnter={setIsEnter} /> : 
-      <Container className="wrapper">
+      {isEnter? <StartPage setIsEnter={setIsEnter} /> : <div className="d-flex wrapper"> 
+      <SideBar />
+      <Container >
         {editStatus ? (
           <EditField
             editStatus={editStatus}
@@ -91,7 +104,9 @@ function Application({ data }) {
             <AddItem addItem={addItem} />
           </div>
         )}
-      </Container>}
+      </Container>
+      </div>
+      }
 
       
 

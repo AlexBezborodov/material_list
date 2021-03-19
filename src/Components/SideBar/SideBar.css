@@ -1,0 +1,70 @@
+.side-bar {
+  background: linear-gradient(
+    0deg,
+    rgba(52, 58, 64, 1) 0%,
+    rgba(23, 162, 184, 1) 68%
+  );
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.open-side-bar {
+    width: 12em;
+    transition: ease-in-out 0.3s;
+}
+.close-side-bar {
+    width: 3em;
+    transition: ease-in-out 0.5s;
+}
+.burger-button {
+  box-sizing: border-box;  
+  width: 26px;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  align-self: flex-end;
+  opacity: 0.4;
+  transition: ease-out 0.5s;
+}
+.burger-button:hover{
+    opacity: 1;
+    border: 1px solid azure;
+    transition: ease-in 0.5s;
+}
+.burger-button:hover > .burger {
+    width: 100%;
+}  
+    
+.burger {
+  height: 5px;
+  width: 5px;
+  background-color: azure;
+  margin: 1px;
+  transition: ease-out 0.5s;
+}
+
+.side-bar-item {
+    color: azure;
+    transition: ease-out 1s;
+    margin: 0 3px;
+    padding: 2px;
+    font-size: 16px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    
+}
+.side-bar-item i {
+    font-size: 22px;
+}
+.side-bar-item:hover {
+    background-color: azure;
+    color: black;
+    transition: ease-in 0.5s;
+    
+}
+.side-bar-item:hover span {
+    font-weight: bold;
+}

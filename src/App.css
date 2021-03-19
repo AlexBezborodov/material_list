@@ -38,7 +38,7 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
   
 }
 .wrapper {
-  min-height: calc(100vh - 208px)
+  min-height: calc(100vh - 200px)
 }
 .edit-item-wrapper {
   width: 50%;
@@ -49,7 +49,7 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
   min-height: 487px;
 }
 .App {
-  min-width: 600px;
+  min-width: 768px;
 }
 .page-link {
   background-color: transparent!important;
