@@ -22,7 +22,7 @@ function Application({ data }) {
   const [searching, searchValue, filteredData] = useFilter(newData);
   const [filtered, sorted, sortedColumn] = useSort(filteredData);
   const [isEnter, setIsEnter] = useState(true);
-  const [sideBar,setSideBar] = useState('open-side-bar')
+  
   const {
     deletedItem,
     editShow,
@@ -43,15 +43,6 @@ function Application({ data }) {
     nextPage,
   } = usePagination(filteredData, activePage, setActivePage);
 
-
-    
-    
-    const isOpenSideBar = () => {
-      let open = "";  
-      (sideBar === "open-side-bar")? open = "close-side-bar" : open = "open-side-bar";
-      console.log(open);      
-      setSideBar(open)  
-    }  
 
   return (
     <div className="App ">

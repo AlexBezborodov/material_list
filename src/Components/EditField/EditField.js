@@ -8,19 +8,26 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
   const [surname, setSurname] = useState(item.surname);
   const [age, setAge] = useState(item.age);
   const [bool, setBool] = useState(item.bool);
-  const [isError, setIsError] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [errorText, setErrorText] = useState("");
-  const [validation] = useValidation(setIsError, setIsDisabled, setErrorText,name,surname);
+  const [formValid, setFormValid] = useState(false);
+  const [
+    nameDirty,
+    surnameDirty,
+    nameError,
+    surnameError,
+    nameHandler,
+    surnameHandler,
+    blurHandler,
+  ] = useValidation(setFormValid, setName, setSurname, name, surname);
+
   let ageArr = [];
-  
+
   const ageList = () => {
     for (let i = 0; i <= 100; i++) {
       ageArr.push(i);
     }
   };
   ageList();
-  
+
   return (
     <div className="edit-item-wrapper border rounded py-1 px-1 my-2 bg-dark">
       <h2 className="text-center text-secondary">Edited field N {item.id}</h2>
@@ -33,9 +40,9 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
               className="transparent-input"
               name="name"
               onChange={(e) => {
-                setName(e.target.value);
+                nameHandler(e)
               }}
-              onBlur={(e) => validation( name, e)}
+              onBlur={(e) => blurHandler(e)}
             />
           </Col>
         </Row>
@@ -46,8 +53,8 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
               value={surname}
               className="transparent-input"
               name="surname"
-              onChange={(e) => setSurname(e.target.value)}
-              onBlur={(e) => validation( surname, e)}
+              onChange={(e) => {surnameHandler(e)}}
+              onBlur={(e) => blurHandler(e)}
             />
           </Col>
         </Row>
@@ -77,7 +84,7 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
               className="m-1"
               size="sm"
               variant="primary"
-              disabled={isDisabled}
+              disabled={!formValid}
               onClick={() =>
                 savedItem(item.id, name, surname, age, bool, false)
               }
@@ -95,7 +102,10 @@ const EditField = ({ item, editCancel, savedItem, idx }) => {
           </Col>
         </Row>
       </Form>
-      {isError ? <ErrorBoundry errorText={errorText} /> : null}
+      {nameDirty && nameError && <ErrorBoundry errorText={nameError} />}
+      {surnameDirty && surnameError && (
+        <ErrorBoundry errorText={surnameError} />
+      )}
     </div>
   );
 };

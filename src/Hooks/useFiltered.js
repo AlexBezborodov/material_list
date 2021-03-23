@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-const useFilter = (data) => {
+const useFilter = (newData) => {
   const [searchValue, setSearchValue] = useState("");
-
+  
   const searching = (val) => {
     setSearchValue(val);
   };
@@ -18,8 +18,7 @@ const useFilter = (data) => {
       });
     }
   };
-  let filteredData = createSearchList(data, searchValue);
-
+  let filteredData = createSearchList(newData, searchValue);
   return [searching, searchValue, filteredData];
 };
 

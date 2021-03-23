@@ -17,7 +17,7 @@ const useSort = (newData) => {
   const filteredColumn = (propName, column) => {
     setSortedColumn(column);
     sortedData.sort(filteredBy(propName.toLowerCase()))
-    
+    console.log(`sorted ${column}`, sortedData);
   };
   const filtered = (propName, column) => {
     switch (propName) {

@@ -1,59 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import ErrorBoundry from "../Error-boundry/ErrorBoundry";
+import useEnterValid from "../../Hooks/useEnterValid";
 
 const StartPage = ({ setIsEnter }) => {
   const [email, setEmail] = useState("");
   const [psw, setPsw] = useState("");
-  const [emailDirty, setEmailDirty] = useState(false);
-  const [pswDirty, setPswDirty] = useState(false);
-  const [emailError, setEmailError] = useState("email can`t be empty");
-  const [pwdError, setPwdError] = useState("password can`t be empty");
-  const [formValid, setFormValid] = useState (false)
-  
+  const [formValid, setFormValid] = useState(false);
+  const [
+    emailDirty,
+    pswDirty,
+    emailError,
+    pwdError,
+    emailHandler,
+    passwordHandler,
+    blurHandler,
+  ] = useEnterValid(setFormValid, setEmail, setPsw);
+
   useEffect(() => {
-   if (emailError || pwdError) {
-     setFormValid(false)
-   } else {
-    setFormValid(true)
-   }
-   
-  }, [emailError,pwdError])
-
-  const emailHandler = (e) => {
-    setEmail(e.target.value);
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setEmailError("not correct Email");
+    if (emailError || pwdError) {
+      setFormValid(false);
     } else {
-      setEmailError("");
+      setFormValid(true);
     }
-  };
-  const passwordHandler = (e) => {
-    setPsw(e.target.value);
-    if (e.target.value.length < 3 || e.target.value.length > 8) {
-      setPwdError("Your password not correct");
-      if (!e.target.value) {
-        setPwdError("password can`t be empty")
-      }
-    } else {
-      setPwdError("");
-    }
-  };
+  }, [emailError, pwdError]);
 
-  const blurHandler = (e) => {
-    switch (e.target.name) {
-      case "email":
-        setEmailDirty(true);
-        break;
-      case "password":
-        setPswDirty(true);
-        break;
-      default:
-        setEmailDirty(false);
-        setPswDirty(false);
-    }
-  };
   return (
     <div className="wrapper">
       <Container className="d-flex justify-content-center align-items-center mt-2">
@@ -81,7 +52,7 @@ const StartPage = ({ setIsEnter }) => {
               onBlur={(e) => blurHandler(e)}
             />
           </Form.Group>
-          
+
           <Button
             disabled={!formValid}
             variant="info"

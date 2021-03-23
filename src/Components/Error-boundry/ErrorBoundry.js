@@ -5,7 +5,7 @@ import '../../App.css'
 
 const ErrorBoundry = ({errorText}) => {
     return (
-        <div className='error '>{errorText}</div>
+        <div className='error '><span>{errorText}</span></div>
     )
 }
 

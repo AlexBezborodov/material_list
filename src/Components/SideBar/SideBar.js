@@ -31,8 +31,8 @@ const SideBar = () => {
         return (
             <div className={`side-bar ${sideBar}`}>
                 <div className="burger-button mx-2 my-3 rounded" onClick={()=> isOpenSideBar()}>
-                    <div className="burger rounded"></div>
-                    <div className="burger rounded"></div>
+                    <div className="burger-small rounded"></div>
+                    <div className="burger-mid rounded"></div>
                     <div className="burger rounded"></div>
                 </div>
                 {list.map((item, id) => {

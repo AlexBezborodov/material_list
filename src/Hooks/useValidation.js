@@ -1,42 +1,73 @@
+import { useState, useEffect } from "react";
 
-const useValidation = (
-  setIsError,
-  setIsDisabled,
-  setErrorText,
-  name,
-  surname
-) => {
-  let onlyLetter = "[0-9]";
+const useValidation = (setFormValid, setName, setSurname) => {
+  const [nameDirty, setNameDirty] = useState(false);
+  const [surnameDirty, setSurnameDirty] = useState(false);
+  const [nameError, setNameError] = useState("");
+  const [surnameError, setSurnameError] = useState("");
+  const numbers = /[0-9]$/;
 
-  
-  // const buttonValidate = (name, surname) => {
-  //   if (name.length > 0 && surname.length > 0) {
-  //     setIsDisabled(false);
+  useEffect(() => {
+    if (nameError || surnameError) {
+      console.log("name error", nameError);
+      console.log("surname error", surnameError);
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [nameError, surnameError]);
 
-  //   }
-  // };
-  
-
-  const validation = (value, e) => {
-    let field = `Field must be greater then zero`;
-    if (value.length < 1) {
-      setIsError(true);
-      setErrorText(field);
+  const nameHandler = (e) => {
+    setName(e.target.value);
+    console.log("name", e.target.value);
+    let figures = e.target.value.match(numbers);
+    if (figures) {
       e.target.classList = "form-control transparent-input danger";
-    } else if (name.match(onlyLetter) || surname.match(onlyLetter)) {
-      setIsError(true);
-
-      setErrorText("Name or Surname cant`t includes figures");
+      setNameError("Name can`t includes figures");
+    } else if (e.target.value < 1) {
+      setNameError("Name mast be greater then 0");
       e.target.classList = "form-control transparent-input danger";
     } else {
-      setIsError(false);
-      setErrorText("");
+      e.target.classList = "form-control transparent-input";
+      setNameError("");
+    }
+  };
+  const surnameHandler = (e) => {
+    setSurname(e.target.value);
+    let figures = e.target.value.match(numbers);
+    if (figures) {
+      setSurnameError("Surname can`t includes figures");
+      e.target.classList = "form-control transparent-input danger";
+    } else if (e.target.value < 1) {
+      setSurnameError("Surname mast be greater then 0");
+      e.target.classList = "form-control transparent-input danger";
+    } else {
+      setSurnameError("");
       e.target.classList = "form-control transparent-input";
     }
   };
 
-
-  return [validation];
+  const blurHandler = (e) => {
+    switch (e.target.name) {
+      case "name":
+        setNameDirty(true);
+        break;
+      case "surname":
+        setSurnameDirty(true);
+        break;
+      default:
+        setNameDirty(false);
+        setSurnameDirty(false);
+    }
+  };
+  return [
+    nameDirty,
+    surnameDirty,
+    nameError,
+    surnameError,
+    nameHandler,
+    surnameHandler,
+    blurHandler,
+  ];
 };
 export default useValidation;
-

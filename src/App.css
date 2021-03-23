@@ -66,7 +66,7 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
   font-weight: bold;
 }
 .error {
-  height: 50px;
+  min-height: 50px;
   background-color: rgba(202, 63, 39, 0.548);
   color:red;
   font-weight: bold;
@@ -76,6 +76,9 @@ box-shadow: 1px 1px 10px 3px rgba(22,184,184,1);
   border-radius: 5px; 
   margin: 5px;
   padding: 15px;
+}
+.error span {
+  max-width: 90%;
 }
 .danger {
   border: 2px solid  rgb(245, 9, 9) !important;

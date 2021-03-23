@@ -19,7 +19,6 @@ const useAddItem = (dataUsers) => {
       })
     );
   };
-
   return [newData, addItem];
 };
 

@@ -7,13 +7,19 @@ import "./Add-item.css";
 
 const AddItem = ({ addItem }) => {
   const [name, setName] = useState("");
-  const [surname, setSurName] = useState("");
+  const [surname, setSurname] = useState("");
   const [age, setAge] = useState(0);
   const [bool, setBool] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [errorText, setErrorText] = useState("");
-  const [validation] = useValidation(setIsError, setIsDisabled, setErrorText,name,surname);
+  const [formValid, setFormValid] = useState(false);
+  const [
+    nameDirty,
+    surnameDirty,
+    nameError,
+    surnameError,
+    nameHandler,
+    surnameHandler,
+    blurHandler,
+  ] = useValidation(setFormValid, setName, setSurname, name, surname);
   let newId = Math.floor(Math.random() * 1000 + 100);
   let ageArr = [];
   const ageList = () => {
@@ -22,15 +28,12 @@ const AddItem = ({ addItem }) => {
     }
   };
   ageList();
-  const inActiveButtons = () => {
-    setIsDisabled(true)
-  }
+  
   const clearFields = () => {
     setName("");
-    setSurName("");
+    setSurname("");
     setAge(18);
-    setBool(true);
-    inActiveButtons();
+    setBool(true);  
   };
 
   return (
@@ -45,9 +48,9 @@ const AddItem = ({ addItem }) => {
               name="name"
               placeholder="Name"
               onChange={(e) => {
-                setName(e.target.value);
+                nameHandler(e)
               }}
-              onBlur={(e) => validation(name, e)}
+              onBlur={(e) => blurHandler(e)}
             />
           </div>
         </Col>
@@ -57,8 +60,8 @@ const AddItem = ({ addItem }) => {
             name="surname"
             placeholder="Surname"
             className="transparent-input"
-            onChange={(e) => setSurName(e.target.value)}
-            onBlur={(e) => validation(surname, e)}
+            onChange={(e) => { surnameHandler(e)}}
+            onBlur={(e) => blurHandler(e)}
           />
         </Col>
         <Col className="d-flex justify-content-center align-items-center ">
@@ -86,18 +89,18 @@ const AddItem = ({ addItem }) => {
             className="m-1"
             size="sm"
             variant="info"
-            disabled={isDisabled}
+            disabled={!formValid}
             onClick={() => {
               addItem(newId, name, surname, age, bool);
               clearFields();
-              inActiveButtons();
+              // inActiveButtons();
             }}
           >
             Add
           </Button>
           <Button
             className="m-1"
-            disabled={isDisabled}
+            // disabled={formValid}
             size="sm"
             variant="warning"
             onClick={() => clearFields()}
@@ -106,7 +109,10 @@ const AddItem = ({ addItem }) => {
           </Button>
         </Col>
       </Row>
-      {isError ? <ErrorBoundry errorText={errorText} /> : null}
+      {nameDirty && nameError && <ErrorBoundry errorText={nameError} />}
+      {surnameDirty && surnameError && (
+        <ErrorBoundry errorText={surnameError} />
+      )}
     </div>
   );
 };
