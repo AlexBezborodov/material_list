@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const usePagination = (filteredData, activePage, setActivePage) => {
+const usePagination = (sortedData, activePage, setActivePage) => {
   const [itemsPerPage] = useState(10);
   const [disabledPrev, setDisabledPrev] = useState(false);
   const [disabledNext, setDisabledNext] = useState(false);
@@ -8,8 +8,8 @@ const usePagination = (filteredData, activePage, setActivePage) => {
   //Current page
   const lastItem = activePage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
-  const currentPage = filteredData.slice(firstItem, lastItem);
-  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+  const currentPage = sortedData.slice(firstItem, lastItem);
+  const pageCount = Math.ceil(sortedData.length / itemsPerPage);
 
   //Change page
   const clickedPage = (pageNumber) => {
@@ -36,7 +36,7 @@ const usePagination = (filteredData, activePage, setActivePage) => {
   };
 
   const nextPage = () => {
-    if (activePage === Math.ceil(filteredData.length / itemsPerPage)) {
+    if (activePage === Math.ceil(sortedData.length / itemsPerPage)) {
       return activePage;
     } else {
       setActivePage(activePage + 1);

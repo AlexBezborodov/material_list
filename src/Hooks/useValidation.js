@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useValidation = (setFormValid, setName, setSurname) => {
+const useValidation = (setFormValid, setName, setSurname,) => {
   const [nameDirty, setNameDirty] = useState(false);
   const [surnameDirty, setSurnameDirty] = useState(false);
   const [nameError, setNameError] = useState("");
@@ -9,17 +9,16 @@ const useValidation = (setFormValid, setName, setSurname) => {
 
   useEffect(() => {
     if (nameError || surnameError) {
-      console.log("name error", nameError);
-      console.log("surname error", surnameError);
       setFormValid(false);
+    }else if (nameDirty && surnameDirty) {
+      setFormValid(true);
     } else {
       setFormValid(true);
     }
-  }, [nameError, surnameError]);
+  }, [nameError, surnameError, nameDirty, surnameDirty]);
 
   const nameHandler = (e) => {
     setName(e.target.value);
-    console.log("name", e.target.value);
     let figures = e.target.value.match(numbers);
     if (figures) {
       e.target.classList = "form-control transparent-input danger";
@@ -59,6 +58,18 @@ const useValidation = (setFormValid, setName, setSurname) => {
         setNameDirty(false);
         setSurnameDirty(false);
     }
+    // const addItemBlurHandler = (e) => {
+    //   switch (e.target.name) {
+    //     case "name":
+    //       setNameDirty(true);
+    //       break;
+    //     case "surname":
+    //       setSurnameDirty(true);
+    //       break;
+    //     default:
+    //       setNameDirty(false);
+    //       setSurnameDirty(false);
+    //   }
   };
   return [
     nameDirty,

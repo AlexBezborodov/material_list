@@ -11,6 +11,7 @@ const AddItem = ({ addItem }) => {
   const [age, setAge] = useState(0);
   const [bool, setBool] = useState(true);
   const [formValid, setFormValid] = useState(false);
+  
   const [
     nameDirty,
     surnameDirty,
@@ -19,7 +20,7 @@ const AddItem = ({ addItem }) => {
     nameHandler,
     surnameHandler,
     blurHandler,
-  ] = useValidation(setFormValid, setName, setSurname, name, surname);
+  ] = useValidation(setFormValid, setName, setSurname);
   let newId = Math.floor(Math.random() * 1000 + 100);
   let ageArr = [];
   const ageList = () => {
@@ -34,6 +35,8 @@ const AddItem = ({ addItem }) => {
     setSurname("");
     setAge(18);
     setBool(true);  
+    setFormValid(false)
+    console.log('formValid',formValid);
   };
 
   return (
@@ -89,18 +92,16 @@ const AddItem = ({ addItem }) => {
             className="m-1"
             size="sm"
             variant="info"
-            disabled={!formValid}
+            disabled={(nameDirty && surnameDirty && formValid)? false : true}
             onClick={() => {
               addItem(newId, name, surname, age, bool);
               clearFields();
-              // inActiveButtons();
             }}
           >
             Add
           </Button>
           <Button
             className="m-1"
-            // disabled={formValid}
             size="sm"
             variant="warning"
             onClick={() => clearFields()}

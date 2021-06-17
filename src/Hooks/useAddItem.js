@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const useAddItem = (dataUsers) => {
   const [users, setUsers] = useState(dataUsers);
-  let newData = users;
+  // let newData = users;
   const addItem = (id, name, surname, age, bool) => {
     const newItem = {
       id,
@@ -12,14 +12,12 @@ const useAddItem = (dataUsers) => {
       bool,
     };
 
-    newData.push(newItem);
+   
     setUsers(
-      newData.map((user) => {
-        return user;
-      })
+      [...users,newItem]
     );
   };
-  return [newData, addItem];
+  return [users, addItem];
 };
 
 export default useAddItem;

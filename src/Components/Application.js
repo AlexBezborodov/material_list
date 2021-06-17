@@ -18,9 +18,9 @@ function Application({ data }) {
   const dataUsers = data.users;
   const headers = data.headers;
   const [activePage, setActivePage] = useState(1);
-  const [newData, addItem] = useAddItem(dataUsers);
-  const [searching, searchValue, filteredData] = useFilter(newData);
-  const [filtered, sorted, sortedColumn] = useSort(filteredData);
+  const [users, addItem] = useAddItem(dataUsers);
+  const [searching, searchValue, filteredData] = useFilter(users);
+  const [filtered, sorted, sortedColumn, sortedData] = useSort(filteredData);
   const [isEnter, setIsEnter] = useState(true);
   
   const {
@@ -31,7 +31,7 @@ function Application({ data }) {
     editStatus,
     editItem,
     index,
-  } = useTable(filteredData, setActivePage);
+  } = useTable(sortedData, setActivePage);
 
   const {
     currentPage,
@@ -41,7 +41,7 @@ function Application({ data }) {
     clickedPage,
     prevPage,
     nextPage,
-  } = usePagination(filteredData, activePage, setActivePage);
+  } = usePagination(sortedData, activePage, setActivePage);
 
 
   return (
